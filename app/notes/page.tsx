@@ -6,11 +6,14 @@ import { fetchNotes } from "@/lib/api";
 export default async function NotesPage() {
   const queryClient = new QueryClient();
 
-  // prefetch notes для SSR
-  await queryClient.prefetchQuery({
-    queryKey: ["notes"],
-    queryFn: () => fetchNotes(),
-  });
+  try {
+    await queryClient.prefetchQuery({
+      queryKey: ["notes", 1, ""],
+      queryFn: () => fetchNotes(1, ""),
+    });
+  } catch {
+    // токен відсутній або помилка API — клієнт покаже помилку
+  }
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>

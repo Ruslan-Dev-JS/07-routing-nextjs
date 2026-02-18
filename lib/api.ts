@@ -18,9 +18,12 @@ export const fetchNotes = async (
 	if (search) params.search = search;
 	if (tag && tag !== "all") params.tag = tag;
 	const { data } = await instance.get<any>("/notes", { params });
+	// бекенд може повертати notes або items
+	const items = data.notes ?? data.items ?? [];
+	const totalPages = data.totalPages ?? 1;
 	return {
-		items: data.notes,
-		totalPages: data.totalPages,
+		items,
+		totalPages,
 	} as FetchNotesResponse;
 };
 

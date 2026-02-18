@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -14,7 +15,10 @@ export default function Home() {
           priority
         />
         <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
+          <h1>NoteHub</h1>
+          <p>
+            <Link href="/notes">Перейти до нотаток</Link>
+          </p>
           <p>
             Looking for a starting point or more instructions? Head over to{" "}
             <a
