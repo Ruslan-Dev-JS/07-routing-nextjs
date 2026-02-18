@@ -1,6 +1,6 @@
 import axios from "axios";
 import type { Note } from "@/types/note";
-import type { FetchNotesResponse } from "@/types/api";
+import type { FetchNotesResponse, NotesApiResponse } from "@/types/api";
 
 const token = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
@@ -17,14 +17,13 @@ export const fetchNotes = async (
 	const params: Record<string, string | number> = { page };
 	if (search) params.search = search;
 	if (tag && tag !== "all") params.tag = tag;
-	const { data } = await instance.get<any>("/notes", { params });
-	// бекенд може повертати notes або items
+	const { data } = await instance.get<NotesApiResponse>("/notes", { params });
 	const items = data.notes ?? data.items ?? [];
 	const totalPages = data.totalPages ?? 1;
 	return {
 		items,
 		totalPages,
-	} as FetchNotesResponse;
+	};
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {

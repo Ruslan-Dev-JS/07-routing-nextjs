@@ -4,16 +4,17 @@ import {
   HydrationBoundary,
 } from "@tanstack/react-query";
 import { fetchNotes } from "@/lib/api";
-import NotesFilterClient from "./Notes.client";
+import NotesClient from "./Notes.client";
 
 export const dynamic = "force-dynamic";
 
 export default async function NotesFilterPage({
   params,
 }: {
-  params: { slug?: string[] };
+  params: Promise<{ slug: string[] }>;
 }) {
-  const slugs = params?.slug || [];
+  const { slug } = await params;
+  const slugs = slug ?? [];
   const tag = slugs[0];
 
   const queryClient = new QueryClient();
@@ -29,7 +30,7 @@ export default async function NotesFilterPage({
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesFilterClient initialTag={tag} />
+      <NotesClient key={tag ?? "all"} initialTag={tag} />
     </HydrationBoundary>
   );
 }
