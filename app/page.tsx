@@ -17,7 +17,7 @@ export default function Home() {
         <div className={styles.intro}>
           <h1>NoteHub</h1>
           <p>
-            <Link href="/notes">Перейти до нотаток</Link>
+            <Link href="/notes/filter/all">Перейти до нотаток</Link>
           </p>
           <p>
             Looking for a starting point or more instructions? Head over to{" "}
