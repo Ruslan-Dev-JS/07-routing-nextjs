@@ -6,11 +6,15 @@ import {
 import { fetchNotes } from "@/lib/api";
 import NotesFilterClient from "@/app/notes/NotesFilter.client";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-export default async function NotesFilterPage({ params }: { params: { tag?: string[] } }) {
-  const tags = params?.tag || [];
-  const tag = tags[0];
+export default async function NotesFilterPage({
+  params,
+}: {
+  params: { slug?: string[] };
+}) {
+  const slugs = params?.slug || [];
+  const tag = slugs[0];
 
   const queryClient = new QueryClient();
 
@@ -20,7 +24,7 @@ export default async function NotesFilterPage({ params }: { params: { tag?: stri
       queryFn: () => fetchNotes(1, "", tag),
     });
   } catch (err) {
-    console.error('Prefetch error', err);
+    console.error("Prefetch error", err);
   }
 
   return (
@@ -29,3 +33,4 @@ export default async function NotesFilterPage({ params }: { params: { tag?: stri
     </HydrationBoundary>
   );
 }
+
