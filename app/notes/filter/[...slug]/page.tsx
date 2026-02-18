@@ -4,7 +4,7 @@ import {
   HydrationBoundary,
 } from "@tanstack/react-query";
 import { fetchNotes } from "@/lib/api";
-import NotesFilterClient from "@/app/notes/NotesFilter.client";
+import NotesFilterClient from "./Notes.client";
 
 export const dynamic = "force-dynamic";
 

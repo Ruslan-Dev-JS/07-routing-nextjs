@@ -4,7 +4,7 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import { fetchNoteById } from "@/lib/api";
-import NotePreview from "../../../notes/[id]/NotePreview.client";
+import NotePreview from "./NotePreview.client";
 
 export const dynamic = "force-dynamic";
 
